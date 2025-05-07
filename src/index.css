@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto'), url('/src/assets/fonts/Roboto.ttf');
+}
+
+
+@theme {
+  --font-roboto: 'Roboto', 'sans-serif';
+
+  --color-crimson: #F04770;
+  --color-mediumseagreen: #06D79F;
+  --color-goldenrod: #FFC53E;
+}

@@ -1,0 +1,53 @@
+name: Deploy Vite App to GitHub Pages
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+permissions:
+  contents: write 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+
+      - name: Delete Previous Tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          
+          PREVIOUS_TAG=$(git tag --sort=-creatordate | sed -n 2p)  # Récupère le tag précédent (2e tag le plus récent)
+          if [[ -n "$PREVIOUS_TAG" ]]; then
+            echo "Deleting previous tag: $PREVIOUS_TAG"
+            git push origin --delete $PREVIOUS_TAG
+          else
+            echo "No previous tag found. Skipping deletion."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
