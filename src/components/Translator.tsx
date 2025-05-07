@@ -2,50 +2,45 @@ import React, { useState } from 'react';
 import { dinoToHuman, humanToDino } from '../utils/translator';
 
 export const Translator: React.FC = () => {
-    const [humanText, setHumanText] = useState<string>('');
-    const [dinoText, setDinoText] = useState<string>('');
+    const [input, setInput] = useState('');
+    const [mode, setMode] = useState<'humanToDino' | 'dinoToHuman'>('humanToDino');
 
-    const translateToDino = (): void => {
-        setDinoText(humanToDino(humanText));
-    };
-
-    const translateToHuman = (): void => {
-        setHumanText(dinoToHuman(dinoText));
-    };
+    const translated = mode === 'humanToDino' ? humanToDino(input) : dinoToHuman(input);
   
     return(
-        <div className='min-h-full flex flex-col items-center justify-center p-4 mt-50'>
-            <h1 className='text-3xl font-bold mb-6'>Traducteur Dinosaure 🦖</h1>
-
-            <div className='w-full max-w-2xl grid grid-cols-1 gap-4'>
-                <textarea
-                    value={humanText}
-                    onChange={(e) => setHumanText(e.target.value)}
-                    placeholder='Texte humain'
-                    className='p-4 border rounded-lg w-full min-h-[100px]'
-                />
-
-                <div className='flex gap-2 justify-center'>
-                    <button
-                        onClick={translateToDino}
-                        className='bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition'
-                    >
-            ➔ Traduire en Dinosaure
-                    </button>
-                    <button
-                        onClick={translateToHuman}
-                        className='bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition'
-                    >
-            Traduire en Humain ➔
-                    </button>
-                </div>
-
-                <textarea
-                    value={dinoText}
-                    onChange={(e) => setDinoText(e.target.value)}
-                    placeholder='Texte dinosaure'
-                    className='p-4 border rounded-lg w-full min-h-[100px]'
-                />
+        <div className='p-4 max-w-lg mx-auto'>
+            <h1 className='text-2xl font-bold mb-4'>Dino Translator 🦖</h1>
+            <textarea
+                className='w-full p-2 border rounded mb-4'
+                rows={4}
+                placeholder='Écris ton texte ici...'
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+            />
+            <div className='mb-4'>
+                <label className='mr-4'>
+                    <input
+                        type='radio'
+                        name='mode'
+                        value='humanToDino'
+                        checked={mode === 'humanToDino'}
+                        onChange={() => setMode('humanToDino')}
+                    />
+                    Humain ➔ Dino
+                </label>
+                <label>
+                    <input
+                        type='radio'
+                        name='mode'
+                        value='dinoToHuman'
+                        checked={mode === 'dinoToHuman'}
+                        onChange={() => setMode('dinoToHuman')}
+                    />
+                    Dino ➔ Humain
+                </label>
+            </div>
+            <div className='p-2 bg-gray-100 rounded'>
+                <p className='whitespace-pre-wrap'>{translated}</p>
             </div>
         </div>
     );
