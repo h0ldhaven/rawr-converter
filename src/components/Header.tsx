@@ -1,9 +1,16 @@
-import type React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Header: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
+
+    const appName = import.meta.env.VITE_APP_NAME;
+
+    useEffect(() => {
+        // Modifier le titre de la page HTML
+        document.title = appName;
+    }, [appName]);
 
     const handleLogoClick = () => {
         if (location.pathname === '/') {
@@ -34,7 +41,7 @@ export const Header: React.FC = () => {
 
                 {/* Titre centré sous le logo */}
                 <div className='text-shadow-custom flex flex-col items-center justify-center w-full md:pt-24 pb-10 md:pb-16 leading-none text-black font-roboto uppercase text-[3em] z-10 mt-2'>
-                    <h1>Rawr-Converter</h1>
+                    <h1>{appName}</h1>
                 </div>
             </div>
         </header>

@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 
 
 export default function Footer(): JSX.Element {
-    const appName = import.meta.env.DEV;
+    const appName = import.meta.env.VITE_APP_NAME;
     const currentYear = new Date().getFullYear();
     const initialYear: number = 2025;
 

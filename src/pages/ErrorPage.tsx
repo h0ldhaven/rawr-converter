@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Header } from '../components/Header';
+import Footer from '../components/Footer';
 
 interface ErrorState {
     errorStatus: number;
@@ -22,6 +24,7 @@ const ErrorPage: React.FC = () => {
 
     return(
         <main className='flex flex-col h-full min-h-screen'>
+            <Header />
             {/* Error Section */}
             <section className='flex flex-col items-center justify-center flex-grow p-6 text-center'>
                 <h1 className='text-4xl font-bold text-red-500 uppercase font-kony' role='text'>Erreur {errorStatus}</h1>
@@ -36,6 +39,7 @@ const ErrorPage: React.FC = () => {
                     </Link>
                 </div>
             </section>
+            <Footer />
         </main>
     );
 };

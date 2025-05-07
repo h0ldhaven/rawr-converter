@@ -11,7 +11,7 @@ const dictionary: Dictionary = dictionaryJson as Dictionary;
  * Fonction pour traduire un texte humain vers le langage dino.
  */
 export function humanToDino(text: string): string {
-    const translated = text.split(/(\s+|[^a-zA-Z0-9]+)/g).map((token) => {
+    const translated = text.split(/(\s+|\P{L}+)/gu).map((token) => {
         if (isWhitespaceOrSymbol(token)) {
             return token;  // Garde les espaces et symboles tels quels
         }
@@ -23,7 +23,7 @@ export function humanToDino(text: string): string {
             return dictionary[lowerToken];
         }
 
-        // Sinon, traduit lettre par lettre
+        // Sinon, traduit lettre par lettre (y compris accents !)
         return Array.from(lowerToken).map((char) => dinoAlphabet[char] ?? char).join('');
     }).join('');
 
@@ -37,7 +37,7 @@ export function dinoToHuman(text: string): string {
     const invertedAlphabet: DinoAlphabet = invertAlphabet(dinoAlphabet);
     const invertedDictionary: Dictionary = invertAlphabet(dictionary);
 
-    const translated = text.split(/(\s+|[^a-zA-Z0-9]+)/g).map((token) => {
+    const translated = text.split(/(\s+|\P{L}+)/gu).map((token) => {
         if (isWhitespaceOrSymbol(token)) {
             return token;
         }
@@ -89,8 +89,8 @@ function invertAlphabet(obj: Record<string, string>): Record<string, string> {
 }
 
 /**
- * Vérifie si un token est un espace ou un symbole (garde le texte intact).
+ * Vérifie si un token est un espace ou un symbole (non lettre).
  */
 function isWhitespaceOrSymbol(token: string): boolean {
-    return /^\s*$/.test(token) || /^[^a-zA-Z0-9]+$/.test(token);
+    return /^\s*$/.test(token) || /^\P{L}+$/u.test(token);
 }
