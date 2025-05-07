@@ -1,15 +1,17 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ErrorPage from './pages/ErrorPage';
 
 const App: React.FC = () => {
-  return(
-    <Router>
-      <Routes>
-        <Route path='/' element={''} />
-        <Route path='*' element={''} />
-      </Routes>
-    </Router>
-  );
+    return(
+        <Router basename={import.meta.env.BASE_URL}>
+            <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='*' element={<ErrorPage />} />
+            </Routes>
+        </Router>
+    );
 };
 
 export default App;

@@ -36,18 +36,22 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
 
-      - name: Delete Previous Tag
+      - name: Delete Previous Tag (keep latest only if more than one)
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          
-          PREVIOUS_TAG=$(git tag --sort=-creatordate | sed -n 2p)  # Récupère le tag précédent (2e tag le plus récent)
-          if [[ -n "$PREVIOUS_TAG" ]]; then
+      
+          # Liste des tags triés par date de création (annotated ou lightweight)
+          TAGS=($(git for-each-ref --sort=-creatordate --format '%(refname:short)' refs/tags))
+      
+          # Vérifie s’il y a au moins 2 tags
+          if [[ ${#TAGS[@]} -ge 2 ]]; then
+            PREVIOUS_TAG=${TAGS[1]}
             echo "Deleting previous tag: $PREVIOUS_TAG"
-            git push origin --delete $PREVIOUS_TAG
+            git push origin --delete "$PREVIOUS_TAG"
           else
-            echo "No previous tag found. Skipping deletion."
+            echo "Only one tag found. Skipping deletion."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
