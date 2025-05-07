@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState  } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Header: React.FC = () => {
+    const [isHovered, setIsHovered] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -32,9 +33,11 @@ export const Header: React.FC = () => {
                 <div className='md:left-[2.5vw] md:absolute md:top-1/2 md:-translate-y-1/2 w-auto max-w-32 sm:max-w-40 lg:max-w-48 h-auto z-50 rounded-full border-2 p-4'>
                     <img
                         onClick={handleLogoClick}
-                        className='w-full h-full object-contain object-center p-2'
-                        src={`${import.meta.env.BASE_URL}images/webp/dino.webp`}
-                        alt='Logo de coral island'
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        className={`w-full h-full object-contain object-center p-2 ${isHovered ? 'playing-animation' : 'paused-animation'}`}
+                        src={`${import.meta.env.BASE_URL}images/png/dinodance.png`}
+                        alt='Logo de dino'
                         aria-hidden='true'
                     />
                 </div>
