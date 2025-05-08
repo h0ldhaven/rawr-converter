@@ -1,4 +1,8 @@
 import type { JSX } from 'react';
+import { faGithub, faTwitch, faInstagram, faTiktok, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IconLink from './reusable-ui/IconLink';
 
 
 export default function Footer(): JSX.Element {
@@ -12,20 +16,65 @@ export default function Footer(): JSX.Element {
                 {appName}
             </h1>
 
-            {/* Socials icons */}
-            <div className='flex flex-wrap items-center justify-center mt-2 space-x-0 space-y-0'>
-
-            </div>
-
             <hr className='border-b-4 max-w-[75vw] w-auto mx-auto my-2 border-black/10' />
 
+            {/* Socials icons */}
+            <div className='flex flex-wrap items-center justify-center mt-2 space-x-0 space-y-0'>
+                {/* GitHub icon */}
+                <IconLink 
+                    icon={faGithub}
+                    link='https://github.com/h0ldhaven'
+                    className='hover:text-[#141414] text-white'
+                    label='Bouton de redirection vers la page github'
+                />
+
+                {/* Twitch Icon */}
+                <IconLink 
+                    icon={faTwitch}
+                    link='https://twitch.tv/h0ldhaven'
+                    className='hover:text-[#9146FF] text-white'
+                    label='Bouton de redirection vers la page twitch'
+                />
+
+                {/* TikTok Icon */}
+                <IconLink 
+                    icon={faTiktok}
+                    link='https://tiktok.com/@h0ldhaven'
+                    className='hover:text-[#D6004C] text-white'
+                    label='Bouton de redirection vers la page TikTok'
+                />
+
+                {/* Instagram Icon */}
+                <IconLink 
+                    icon={faInstagram}
+                    link='https://instagram.com/holdhaven/'
+                    className='hover:text-[#E1306C] text-white'
+                    label='Bouton de redirection vers la page Instagram'
+                />
+
+                {/* YouTube Icon */}
+                <IconLink 
+                    icon={faYoutube}
+                    link='https://youtube.com/@h0ldhaven'
+                    className='hover:text-[#FF0000] text-white'
+                    label='Bouton de redirection vers la page YouTube'
+                />
+            </div>
+
             {/* Footer text */}
-            <p className='mt-1 text-base md:text-lg font-roboto' role='text'>
-                Copyright <span aria-hidden='true' >©</span> - {initialYear === currentYear ? currentYear : `${initialYear} - ${currentYear}`}
-            </p>
-            <p className='mt-1 text-sm italic md:text-base font- opacity-90'>
-                Tous droits réservés
-            </p>
+            <div className='flex flex-col flex-wrap'>
+                <div className='flex flex-row flex-wrap justify-center font-roboto'>
+                    <p className='text-base md:text-lg mr-1' role='text'>
+                        Copyright <span aria-hidden='true' >©</span> - {initialYear === currentYear ? currentYear : `${initialYear} - ${currentYear}`}
+                    </p>
+                    <p className='text-sm italic md:text-base opacity-90 ml-1'>
+                        Tous droits réservés
+                    </p>
+                </div>
+                <div className='flex flex-col justify-baseline items-start text-left mt-2'>
+                    <h3>made with <FontAwesomeIcon className='text-red-600 animate-bounce duration-800 ease-out m-0 p-0' icon={faHeart} /> by h0ldhaven</h3>
+                </div>
+            </div>
         </footer>
     );
 };
