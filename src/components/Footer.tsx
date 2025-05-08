@@ -63,16 +63,18 @@ export default function Footer(): JSX.Element {
 
             {/* Footer text */}
             <div className='flex flex-col flex-wrap'>
-                <div className='flex flex-row flex-wrap justify-center font-roboto'>
-                    <p className='text-base md:text-lg mr-1' role='text'>
+                <div className='flex flex-row flex-wrap justify-center items-center content-center font-roboto'>
+                    <p className='text-base md:text-lg px-1' role='text'>
                         Copyright <span aria-hidden='true' >©</span> - {initialYear === currentYear ? currentYear : `${initialYear} - ${currentYear}`}
                     </p>
-                    <p className='text-sm italic md:text-base opacity-90 ml-1'>
+                    <p className='text-sm italic md:text-base opacity-90 px-1'>
                         Tous droits réservés
                     </p>
                 </div>
-                <div className='flex flex-col justify-baseline items-start text-left mt-2'>
-                    <h3>made with <FontAwesomeIcon className='text-red-600 animate-bounce duration-800 ease-out m-0 p-0' icon={faHeart} /> by h0ldhaven</h3>
+                <div className='flex flex-col flex-wrap justify-end items-start mt-2'>
+                    <h3>
+                        made with <FontAwesomeIcon className='text-red-600 animate-bounce duration-800 ease-out m-0 p-1' icon={faHeart} /> by h0ldhaven
+                    </h3>
                 </div>
             </div>
         </footer>
