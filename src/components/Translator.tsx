@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { dinoToHuman, humanToDino } from '../utils/translator';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GiDinosaurRex } from 'react-icons/gi';
+import { ButtonAction } from './reusable-ui/ButtonAction';
 
 export const Translator: React.FC = () => {
     const [text, setText] = useState('');
@@ -30,6 +31,10 @@ export const Translator: React.FC = () => {
     };
 
     const translated = translate(text, mode);
+
+    const handleClearButton = async () => {
+        setText('');
+    };
   
     return(
         <div className='flex items-stretch justify-center w-full h-full'>
@@ -60,6 +65,12 @@ export const Translator: React.FC = () => {
                     placeholder={mode === 'humanToDino' ? 'Écris ton texte humain ici...' : 'Écris ton texte Dino ici...'}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                />
+
+                <ButtonAction  
+                    onClick={handleClearButton}
+                    disabled={text.trim().length === 0}
+                    label={'Effacer le texte'}
                 />
 
                 <h3 className='text-lg font-semibold mb-4 dark:text-white'>Traduction :</h3>
