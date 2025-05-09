@@ -10,13 +10,12 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout the main branch
         uses: actions/checkout@v4
         with:
-          ref: main
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -36,21 +35,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
-
-      - name: Delete Previous Tag (keep latest only if more than one)
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          
-          # Récupère la liste des tags triés par date de commit (plus fiable)
-          TAGS=($(git tag --sort=-creatordate))
-          
-          echo "All tags found: ${TAGS[@]}"
-          
-          if [[ ${#TAGS[@]} -ge 2 ]]; then
-            PREVIOUS_TAG=${TAGS[1]}
-            echo "Deleting previous tag: $PREVIOUS_TAG"
-            git push origin --delete "$PREVIOUS_TAG"
-          else
-            echo "Only one tag found. Skipping deletion."
-          fi
