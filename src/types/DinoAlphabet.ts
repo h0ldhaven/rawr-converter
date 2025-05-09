@@ -1,0 +1,1 @@
+export type DinoAlphabet = Record<string, string>;

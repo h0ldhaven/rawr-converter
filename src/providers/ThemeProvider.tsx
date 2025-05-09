@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { type Theme, ThemeEnum } from '../types/Theme';
-
-interface ThemeProviderProps {
-  children: React.ReactNode;
-}
+import type { ThemeProviderProps } from '../interfaces/ThemeProviderProps';
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState<Theme>(ThemeEnum.LIGHT);

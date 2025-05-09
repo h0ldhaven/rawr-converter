@@ -1,0 +1,1 @@
+export type DinoDictionary = Record<string, string>;
