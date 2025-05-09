@@ -1,11 +1,10 @@
 import dinoAlphabetJson from '../data/dinoAlphabet.json';
 import dictionaryJson from '../data/dictionary.json';
-
-type DinoAlphabet = Record<string, string>;
-type Dictionary = Record<string, string>;
+import type { DinoAlphabet } from '../types/DinoAlphabet';
+import type { DinoDictionary } from '../types/DinoDictionary';
 
 const dinoAlphabet: DinoAlphabet = dinoAlphabetJson as DinoAlphabet;
-const dictionary: Dictionary = dictionaryJson as Dictionary;
+const dictionary: DinoDictionary = dictionaryJson as DinoDictionary;
 
 /**
  * Fonction pour traduire un texte humain vers le langage dino.
@@ -35,7 +34,7 @@ export function humanToDino(text: string): string {
  */
 export function dinoToHuman(text: string): string {
     const invertedAlphabet: DinoAlphabet = invertAlphabet(dinoAlphabet);
-    const invertedDictionary: Dictionary = invertAlphabet(dictionary);
+    const invertedDictionary: DinoDictionary = invertAlphabet(dictionary);
 
     const translated = text.split(/(\s+|\P{L}+)/gu).map((token) => {
         if (isWhitespaceOrSymbol(token)) {

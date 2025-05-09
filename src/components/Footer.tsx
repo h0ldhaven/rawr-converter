@@ -4,7 +4,6 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconLink from './reusable-ui/IconLink';
 
-
 export default function Footer(): JSX.Element {
     const appName = import.meta.env.VITE_APP_NAME;
     const currentYear = new Date().getFullYear();
