@@ -59,7 +59,7 @@ export const Header: React.FC = () => {
                 </div>
 
                 {/* Logo à gauche */}
-                <div className='flex justify-center md:justify-start md:absolute md:left-[2.5vw] md:top-1/2 md:-translate-y-1/2 w-auto max-w-32 sm:max-w-40 lg:max-w-48 h-auto z-50 rounded-full border-2 border-dotted border-lime-600 dark:border-indigo-500 p-4 mt-10 md:mt-0'>
+                <div className='flex justify-center md:justify-start md:absolute md:left-[2.5vw] md:top-1/2 md:-translate-y-1/2 w-auto max-w-32 sm:max-w-40 lg:max-w-48 h-auto z-50 rounded-full p-4 mt-10 md:mt-0 hover:scale-110 duration-300 ease-in-out'>
                     <img
                         onClick={handleLogoClick}
                         className='w-full h-full object-contain object-center p-2'
